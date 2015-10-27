@@ -1,4 +1,5 @@
-![](http://algs4.cs.princeton.edu/cover.png)
+<img alt="bookcover" align="right"
+     src="http://algs4.cs.princeton.edu/cover.png" height="314" width="250"/>
 
 # Algorithms (Sedgewick and Wayne, Princeton)
 
