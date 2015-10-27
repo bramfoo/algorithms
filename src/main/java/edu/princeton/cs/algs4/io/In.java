@@ -1,4 +1,4 @@
-package edu.princeton.cs.introcs;
+package edu.princeton.cs.algs4.io;
 
 /*************************************************************************
  *  Compilation:  javac In.java

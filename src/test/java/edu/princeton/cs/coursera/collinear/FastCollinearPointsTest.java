@@ -17,13 +17,14 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import edu.princeton.cs.algs4.io.In;
 import edu.princeton.cs.coursera.TestUtils;
 
 /**
- * Unit tests for Deque
+ * Unit tests for FastCollinearPoints
  */
 @RunWith(JUnit4.class)
-public class FastTest
+public class FastCollinearPointsTest
 {
 
     PrintStream stdout;
@@ -62,6 +63,20 @@ public class FastTest
         outContent.reset();
     }
 
+    private Point[] readInput(String inputFile)
+    {
+        In in = new In(inputFile);
+        int N = in.readInt();
+        Point[] points = new Point[N];
+        for (int i = 0; i < N; i++) {
+            int x = in.readInt();
+            int y = in.readInt();
+            points[i] = new Point(x, y);
+        }
+        
+        return points;
+    }
+
     @Test
     public void testNoLines()
     {
@@ -69,10 +84,42 @@ public class FastTest
         TestUtils.syncOut(outContent);
 
         // No results expected
-        Fast.main(new String[]{random23fileName});
-        assertEquals("Should have no solutions", 0, outContent.size());
+        FastCollinearPoints fast = new FastCollinearPoints(readInput(random23fileName));
+
+        assertEquals("Should have no solutions", 0, fast.numberOfSegments());
     }
 
+    @Test
+    public void testDuplicatePoints()
+    {
+        // IllegalArgumentException expected
+        Point[] p = new Point[]{new Point(0, 0), new Point(1, 1), new Point(2, 2), new Point(1, 1), new Point(3, 3)};
+
+        // Must be the last test in the class
+        exception.expect(IllegalArgumentException.class);
+        FastCollinearPoints fast = new FastCollinearPoints(p);
+    }
+
+    @Test
+    public void testNull()
+    {
+        // NullPointerException expected
+        // Must be the last test in the class
+        exception.expect(NullPointerException.class);
+        FastCollinearPoints fast = new FastCollinearPoints(null);
+    }
+
+    @Test
+    public void testNullPoints()
+    {
+        // NullPointerException expected
+        Point[] p = new Point[]{new Point(0, 0), new Point(1, 1), new Point(2, 2), null, new Point(3, 3)};
+
+        // Must be the last test in the class
+        exception.expect(NullPointerException.class);
+        FastCollinearPoints fast = new FastCollinearPoints(p);
+    }
+    
     @Test
     public void testNotEnoughPoints()
     {
@@ -80,8 +127,8 @@ public class FastTest
         TestUtils.syncOut(outContent);
 
         // No results expected
-        Fast.main(new String[]{in3fileName});
-        assertEquals("Should have no solutions", 0, outContent.size());
+        FastCollinearPoints fast = new FastCollinearPoints(readInput(in3fileName));
+        assertEquals("Should have no solutions", 0, fast.numberOfSegments());
     }
 
     @Test
@@ -94,12 +141,15 @@ public class FastTest
         // (10000, 0) -> (7000, 3000) -> (3000, 7000) -> (0, 10000)
         // (3000, 4000) -> (6000, 7000) -> (14000, 15000) -> (20000, 21000)
         Set<String> solutions = new HashSet<String>();
-        solutions.add("(10000, 0) -> (7000, 3000) -> (3000, 7000) -> (0, 10000)");
-        solutions.add("(3000, 4000) -> (6000, 7000) -> (14000, 15000) -> (20000, 21000)");
+        solutions.add("(10000, 0) -> (0, 10000)");
+        solutions.add("(3000, 4000) -> (20000, 21000)");
         
-        Fast.main(new String[]{in8fileName});
+        FastCollinearPoints fast = new FastCollinearPoints(readInput(in8fileName));
+        assertEquals("Incorrect number of solutions", solutions.size(), fast.numberOfSegments());
+
+        for (LineSegment s : fast.segments())
+            System.out.println(s);
         String[] result = outContent.toString().split("\n");
-        assertEquals("Incorrect number of solutions", solutions.size(), result.length);
 
         for (String s : result)
             assertTrue("Result not in solution set: " + s, solutions.contains(s));    
@@ -120,14 +170,17 @@ public class FastTest
         //        (2000, 24000) -> (9000, 24000) -> (14000, 24000) -> (25000, 24000)
         //        (2000, 29000) -> (4000, 29000) -> (22000, 29000) -> (28000, 29000)
         Set<String> solutions = new HashSet<String>();
-        solutions.add("(1000, 17000) -> (13000, 17000) -> (17000, 17000) -> (29000, 17000)");
-        solutions.add("(1000, 17000) -> (1000, 27000) -> (1000, 28000) -> (1000, 31000)");
-        solutions.add("(2000, 24000) -> (9000, 24000) -> (14000, 24000) -> (25000, 24000)");
-        solutions.add("(2000, 29000) -> (4000, 29000) -> (22000, 29000) -> (28000, 29000)");
+        solutions.add("(1000, 17000) -> (29000, 17000)");
+        solutions.add("(1000, 17000) -> (1000, 31000)");
+        solutions.add("(2000, 24000) -> (25000, 24000)");
+        solutions.add("(2000, 29000) -> (28000, 29000)");
         
-        Fast.main(new String[]{in40fileName});
+        FastCollinearPoints fast = new FastCollinearPoints(readInput(in40fileName));
+        assertEquals("Incorrect number of solutions", solutions.size(), fast.numberOfSegments());
+
+        for (LineSegment s : fast.segments())
+            System.out.println(s);
         String[] result = outContent.toString().split("\n");
-        assertEquals("Incorrect number of solutions", solutions.size(), result.length);
 
         for (String s : result)
             assertTrue("Result not in solution set: " + s, solutions.contains(s));    
@@ -150,16 +203,19 @@ public class FastTest
         //        (3250, 17450) -> (8500, 17450) -> (13400, 17450) -> (17250, 17450)
         //        (31000, 500) -> (29900, 1600) -> (23000, 8500) -> (21900, 9600)
         Set<String> solutions = new HashSet<String>();
-        solutions.add("(1650, 2050) -> (11750, 7100) -> (17350, 9900) -> (28350, 15400)");
-        solutions.add("(7300, 10050) -> (7300, 10450) -> (7300, 17000) -> (7300, 25700) -> (7300, 31650)");
-        solutions.add("(23000, 8500) -> (29550, 8500) -> (30000, 8500) -> (30950, 8500)");
-        solutions.add("(2950, 200) -> (2950, 4050) -> (2950, 5600) -> (2950, 25400)");
-        solutions.add("(3250, 17450) -> (8500, 17450) -> (13400, 17450) -> (17250, 17450)");
-        solutions.add("(31000, 500) -> (29900, 1600) -> (23000, 8500) -> (21900, 9600)");
+        solutions.add("(1650, 2050) -> (28350, 15400)");
+        solutions.add("(7300, 10050) -> (7300, 31650)");
+        solutions.add("(23000, 8500) -> (30950, 8500)");
+        solutions.add("(2950, 200) -> (2950, 25400)");
+        solutions.add("(3250, 17450) -> (17250, 17450)");
+        solutions.add("(31000, 500) -> (21900, 9600)");
         
-        Fast.main(new String[]{in300fileName});
+        FastCollinearPoints fast = new FastCollinearPoints(readInput(in300fileName));
+        assertEquals("Incorrect number of solutions", solutions.size(), fast.numberOfSegments());
+
+        for (LineSegment s : fast.segments())
+            System.out.println(s);
         String[] result = outContent.toString().split("\n");
-        assertEquals("Incorrect number of solutions", solutions.size(), result.length);
 
         for (String s : result)
             assertTrue("Result not in solution set: " + s, solutions.contains(s));    
@@ -183,17 +239,20 @@ public class FastTest
         //        (29100, 24300) -> (25200, 24950) -> (20400, 25750) -> (18900, 26000)
         //        (27400, 24750) -> (25200, 24950) -> (24650, 25000) -> (22450, 25200) -> (21900, 25250)
         Set<String> solutions = new HashSet<String>();
-        solutions.add("(16050, 950) -> (15250, 1750) -> (14750, 2250) -> (1050, 15950)");
-        solutions.add("(18150, 7150) -> (17500, 8450) -> (17150, 9150) -> (11250, 20950)");
-        solutions.add("(26000, 8900) -> (20250, 19250) -> (20000, 19700) -> (15250, 28250)");
-        solutions.add("(20950, 9500) -> (20950, 10850) -> (20950, 14450) -> (20950, 15000) -> (20950, 17250) -> (20950, 28700)");
-        solutions.add("(16450, 10750) -> (16500, 10750) -> (21000, 10750) -> (23200, 10750)");
-        solutions.add("(29100, 24300) -> (25200, 24950) -> (20400, 25750) -> (18900, 26000)");
-        solutions.add("(27400, 24750) -> (25200, 24950) -> (24650, 25000) -> (22450, 25200) -> (21900, 25250)");
+        solutions.add("(16050, 950) -> (1050, 15950)");
+        solutions.add("(18150, 7150) -> (11250, 20950)");
+        solutions.add("(26000, 8900) -> (15250, 28250)");
+        solutions.add("(20950, 9500) -> (20950, 28700)");
+        solutions.add("(16450, 10750) -> (23200, 10750)");
+        solutions.add("(29100, 24300) -> (18900, 26000)");
+        solutions.add("(27400, 24750) -> (21900, 25250)");
         
-        Fast.main(new String[]{in400fileName});
+        FastCollinearPoints fast = new FastCollinearPoints(readInput(in400fileName));
+        assertEquals("Incorrect number of solutions", solutions.size(), fast.numberOfSegments());
+
+        for (LineSegment s : fast.segments())
+            System.out.println(s);
         String[] result = outContent.toString().split("\n");
-        assertEquals("Incorrect number of solutions", solutions.size(), result.length);
 
         for (String s : result)
             assertTrue("Result not in solution set: " + s, solutions.contains(s));    
@@ -214,14 +273,17 @@ public class FastTest
         //        (13000, 0) -> (11000, 3000) -> (9000, 6000) -> (5000, 12000)
         //        (30000, 0) -> (20000, 10000) -> (10000, 20000) -> (0, 30000)
         Set<String> solutions = new HashSet<String>();
-        solutions.add("(10000, 0) -> (13000, 0) -> (20000, 0) -> (30000, 0)");
-        solutions.add("(10000, 0) -> (8000, 2000) -> (2000, 8000) -> (0, 10000)");
-        solutions.add("(13000, 0) -> (11000, 3000) -> (9000, 6000) -> (5000, 12000)");
-        solutions.add("(30000, 0) -> (20000, 10000) -> (10000, 20000) -> (0, 30000)");
+        solutions.add("(10000, 0) -> (30000, 0)");
+        solutions.add("(10000, 0) -> (0, 10000)");
+        solutions.add("(13000, 0) -> (5000, 12000)");
+        solutions.add("(30000, 0) -> (0, 30000)");
         
-        Fast.main(new String[]{equifileName});
+        FastCollinearPoints fast = new FastCollinearPoints(readInput(equifileName));
+        assertEquals("Incorrect number of solutions", solutions.size(), fast.numberOfSegments());
+
+        for (LineSegment s : fast.segments())
+            System.out.println(s);
         String[] result = outContent.toString().split("\n");
-        assertEquals("Incorrect number of solutions", solutions.size(), result.length);
 
         for (String s : result)
             assertTrue("Result not in solution set: " + s, solutions.contains(s));    
@@ -240,15 +302,18 @@ public class FastTest
         //        (10375, 12711) -> (14226, 12711) -> (18177, 12711) -> (20385, 12711)
         //        (2682, 14118) -> (5067, 14118) -> (7453, 14118) -> (7821, 14118)
         Set<String> solutions = new HashSet<String>();
-        solutions.add("(4750, 4652) -> (5766, 4652) -> (9972, 4652) -> (16307, 4652)");
-        solutions.add("(1888, 7657) -> (7599, 7657) -> (12772, 7657) -> (13832, 7657)");
-        solutions.add("(8934, 7996) -> (10411, 7996) -> (13291, 7996) -> (20547, 7996)");
-        solutions.add("(10375, 12711) -> (14226, 12711) -> (18177, 12711) -> (20385, 12711)");
-        solutions.add("(2682, 14118) -> (5067, 14118) -> (7453, 14118) -> (7821, 14118)");
+        solutions.add("(4750, 4652) -> (16307, 4652)");
+        solutions.add("(1888, 7657) -> (13832, 7657)");
+        solutions.add("(8934, 7996) -> (20547, 7996)");
+        solutions.add("(10375, 12711) -> (20385, 12711)");
+        solutions.add("(2682, 14118) -> (7821, 14118)");
         
-        Fast.main(new String[]{horizfileName});
+        FastCollinearPoints fast = new FastCollinearPoints(readInput(horizfileName));
+        assertEquals("Incorrect number of solutions", solutions.size(), fast.numberOfSegments());
+
+        for (LineSegment s : fast.segments())
+            System.out.println(s);
         String[] result = outContent.toString().split("\n");
-        assertEquals("Incorrect number of solutions", solutions.size(), result.length);
 
         for (String s : result)
             assertTrue("Result not in solution set: " + s, solutions.contains(s));    
@@ -268,15 +333,18 @@ public class FastTest
         //        (14407, 10367) -> (14407, 17188) -> (14407, 17831) -> (14407, 19953)
         
         Set<String> solutions = new HashSet<String>();
-        solutions.add("(8421, 1829) -> (8421, 11344) -> (8421, 15144) -> (8421, 18715)");
-        solutions.add("(15976, 3370) -> (15976, 4589) -> (15976, 8933) -> (15976, 9945)");
-        solutions.add("(5757, 3426) -> (5757, 13581) -> (5757, 16647) -> (5757, 20856)");
-        solutions.add("(2088, 6070) -> (2088, 7091) -> (2088, 11500) -> (2088, 16387)");
-        solutions.add("(14407, 10367) -> (14407, 17188) -> (14407, 17831) -> (14407, 19953)");
+        solutions.add("(8421, 1829) -> (8421, 18715)");
+        solutions.add("(15976, 3370) -> (15976, 9945)");
+        solutions.add("(5757, 3426) -> (5757, 20856)");
+        solutions.add("(2088, 6070) -> (2088, 16387)");
+        solutions.add("(14407, 10367) -> (14407, 19953)");
         
-        Fast.main(new String[]{vertfileName});
+        FastCollinearPoints fast = new FastCollinearPoints(readInput(vertfileName));
+        assertEquals("Incorrect number of solutions", solutions.size(), fast.numberOfSegments());
+
+        for (LineSegment s : fast.segments())
+            System.out.println(s);
         String[] result = outContent.toString().split("\n");
-        assertEquals("Incorrect number of solutions", solutions.size(), result.length);
 
         for (String s : result)
             assertTrue("Result not in solution set: " + s, solutions.contains(s));    
@@ -291,11 +359,14 @@ public class FastTest
         // Expected results:
         //        (14000, 10000) -> (18000, 10000) -> (19000, 10000) -> (21000, 10000) -> (32000, 10000)
         Set<String> solutions = new HashSet<String>();
-        solutions.add("(14000, 10000) -> (18000, 10000) -> (19000, 10000) -> (21000, 10000) -> (32000, 10000)");
+        solutions.add("(14000, 10000) -> (32000, 10000)");
         
-        Fast.main(new String[]{in6fileName});
+        FastCollinearPoints fast = new FastCollinearPoints(readInput(in6fileName));
+        assertEquals("Incorrect number of solutions", solutions.size(), fast.numberOfSegments());
+
+        for (LineSegment s : fast.segments())
+            System.out.println(s);
         String[] result = outContent.toString().split("\n");
-        assertEquals("Incorrect number of solutions", solutions.size(), result.length);
 
         for (String s : result)
             assertTrue("Result not in solution set: " + s, solutions.contains(s));    
@@ -317,15 +388,18 @@ public class FastTest
         //        (0, 0) -> (0, 5000) -> (0, 10000) -> (0, 11000) -> (0, 15000) -> (0, 20000) -> (0, 25000) -> (0, 30000)
         //        (30000, 0) -> (27000, 7500) -> (26000, 10000) -> (20000, 25000) -> (19000, 27500) -> (18000, 30000)
         Set<String> solutions = new HashSet<String>();
-        solutions.add("(0, 0) -> (5000, 0) -> (10000, 0) -> (15000, 0) -> (20000, 0) -> (25000, 0) -> (30000, 0)");
-        solutions.add("(5000, 0) -> (10000, 3100) -> (15000, 6200) -> (20000, 9300) -> (25000, 12400)");
-        solutions.add("(0, 0) -> (2300, 4100) -> (4600, 8200) -> (11500, 20500)");
-        solutions.add("(0, 0) -> (0, 5000) -> (0, 10000) -> (0, 11000) -> (0, 15000) -> (0, 20000) -> (0, 25000) -> (0, 30000)");
-        solutions.add("(30000, 0) -> (27000, 7500) -> (26000, 10000) -> (20000, 25000) -> (19000, 27500) -> (18000, 30000)");
+        solutions.add("(0, 0) -> (30000, 0)");
+        solutions.add("(5000, 0) -> (25000, 12400)");
+        solutions.add("(0, 0) -> (11500, 20500)");
+        solutions.add("(0, 0) -> (0, 30000)");
+        solutions.add("(30000, 0) -> (18000, 30000)");
         
-        Fast.main(new String[]{inarowfileName});
+        FastCollinearPoints fast = new FastCollinearPoints(readInput(inarowfileName));
+        assertEquals("Incorrect number of solutions", solutions.size(), fast.numberOfSegments());
+
+        for (LineSegment s : fast.segments())
+            System.out.println(s);
         String[] result = outContent.toString().split("\n");
-        assertEquals("Incorrect number of solutions", solutions.size(), result.length);
 
         for (String s : result)
             assertTrue("Result not in solution set: " + s, solutions.contains(s));    

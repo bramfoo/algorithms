@@ -12,7 +12,7 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import edu.princeton.cs.introcs.In;
+import edu.princeton.cs.algs4.io.In;
 
 /**
  * Unit tests for Percolation

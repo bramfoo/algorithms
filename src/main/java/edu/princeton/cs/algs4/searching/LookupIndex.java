@@ -1,6 +1,6 @@
 package edu.princeton.cs.algs4.searching;
 import edu.princeton.cs.algs4.fundamentals.Queue;
-import  edu.princeton.cs.introcs.*;
+import edu.princeton.cs.algs4.io.*;
 
 /*************************************************************************
  *  Compilation:  javac LookupIndex.java

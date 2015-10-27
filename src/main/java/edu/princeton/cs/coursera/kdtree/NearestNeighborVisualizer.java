@@ -1,8 +1,8 @@
 package edu.princeton.cs.coursera.kdtree;
 
 import edu.princeton.cs.algs4.fundamentals.Point2D;
-import edu.princeton.cs.introcs.In;
-import edu.princeton.cs.introcs.StdDraw;
+import edu.princeton.cs.algs4.io.In;
+import edu.princeton.cs.algs4.io.StdDraw;
 
 /*************************************************************************
  *  Compilation:  javac NearestNeighborVisualizer.java

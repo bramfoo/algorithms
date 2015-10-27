@@ -1,7 +1,7 @@
 package edu.princeton.cs.coursera.wordnet;
 
-import edu.princeton.cs.introcs.In;
-import edu.princeton.cs.introcs.StdOut;
+import edu.princeton.cs.algs4.io.In;
+import edu.princeton.cs.algs4.io.StdOut;
 
 /**
  * This class implements an immutable data type that calculates the outcast of a

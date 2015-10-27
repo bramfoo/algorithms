@@ -1,7 +1,7 @@
 package edu.princeton.cs.coursera.percolation;
 
-import edu.princeton.cs.introcs.StdDraw;
-import edu.princeton.cs.introcs.StdOut;
+import edu.princeton.cs.algs4.io.StdDraw;
+import edu.princeton.cs.algs4.io.StdOut;
 
 /****************************************************************************
  *  Compilation:  javac InteractivePercolationVisualizer.java

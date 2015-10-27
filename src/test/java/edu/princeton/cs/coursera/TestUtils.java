@@ -8,8 +8,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import edu.princeton.cs.introcs.StdIn;
-import edu.princeton.cs.introcs.StdOut;
+import edu.princeton.cs.algs4.io.StdIn;
+import edu.princeton.cs.algs4.io.StdOut;
 
 public class TestUtils
 {

@@ -1,11 +1,8 @@
 package edu.princeton.cs.coursera.collinear;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -120,23 +117,23 @@ public class PointTest
     {
         p = new Point(0, 0);
         q = new Point(1, 1);
-        assertEquals("Slope order not correct", 1, p.SLOPE_ORDER.compare(q, p));
-        assertEquals("Slope order not correct", 1, q.SLOPE_ORDER.compare(p, q));
-        assertEquals("Slope order not correct", -1, p.SLOPE_ORDER.compare(p, q));
-        assertEquals("Slope order not correct", -1, q.SLOPE_ORDER.compare(q, p));
+        assertEquals("Slope order not correct", 1, p.slopeOrder().compare(q, p));
+        assertEquals("Slope order not correct", 1, q.slopeOrder().compare(p, q));
+        assertEquals("Slope order not correct", -1, p.slopeOrder().compare(p, q));
+        assertEquals("Slope order not correct", -1, q.slopeOrder().compare(q, p));
         
         r = new Point(1, 1);
-        assertEquals("Slope order not correct", 0, p.SLOPE_ORDER.compare(q, r));
-        assertEquals("Slope order not correct", 1, q.SLOPE_ORDER.compare(p, r));
+        assertEquals("Slope order not correct", 0, p.slopeOrder().compare(q, r));
+        assertEquals("Slope order not correct", 1, q.slopeOrder().compare(p, r));
 
         
         r = new Point(2, 3);
-        assertEquals("Slope order not correct", -1, p.SLOPE_ORDER.compare(q, r));
-        assertEquals("Slope order not correct", 1, p.SLOPE_ORDER.compare(r, q));
+        assertEquals("Slope order not correct", -1, p.slopeOrder().compare(q, r));
+        assertEquals("Slope order not correct", 1, p.slopeOrder().compare(r, q));
 
         r = null;
         exception.expect(NullPointerException.class);
-        p.SLOPE_ORDER.compare(q, r);
+        p.slopeOrder().compare(q, r);
     }
     
     @Test

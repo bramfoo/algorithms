@@ -16,7 +16,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import edu.princeton.cs.algs4.fundamentals.Point2D;
-import edu.princeton.cs.introcs.In;
+import edu.princeton.cs.algs4.fundamentals.RectHV;
+import edu.princeton.cs.algs4.io.In;
 
 /**
  * Unit tests for PointSET

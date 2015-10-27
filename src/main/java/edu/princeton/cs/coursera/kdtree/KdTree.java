@@ -1,6 +1,7 @@
 package edu.princeton.cs.coursera.kdtree;
 
 import edu.princeton.cs.algs4.fundamentals.Point2D;
+import edu.princeton.cs.algs4.fundamentals.RectHV;
 
 /**
  * This class is a mutable data type that represents a set of points in the unit

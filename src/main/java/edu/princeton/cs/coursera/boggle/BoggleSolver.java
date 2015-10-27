@@ -1,7 +1,7 @@
 package edu.princeton.cs.coursera.boggle;
 
-import edu.princeton.cs.introcs.In;
-import edu.princeton.cs.introcs.StdOut;
+import edu.princeton.cs.algs4.io.In;
+import edu.princeton.cs.algs4.io.StdOut;
 
 /**
  * FIXME

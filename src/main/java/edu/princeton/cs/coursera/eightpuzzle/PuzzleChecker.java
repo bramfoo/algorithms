@@ -1,6 +1,6 @@
 package edu.princeton.cs.coursera.eightpuzzle;
 
-import edu.princeton.cs.introcs.In;
+import edu.princeton.cs.algs4.io.In;
 
 /*************************************************************************
  *  Compilation:  javac PuzzleChecker.java
