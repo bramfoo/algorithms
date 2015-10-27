@@ -1,7 +1,7 @@
 package edu.princeton.cs.coursera.seamcarving;
 
-import edu.princeton.cs.introcs.Picture;
-import edu.princeton.cs.introcs.Stopwatch;
+import edu.princeton.cs.algs4.io.Picture;
+import edu.princeton.cs.algs4.io.Stopwatch;
 
 /*************************************************************************
  *  Compilation:  javac ResizeDemo.java

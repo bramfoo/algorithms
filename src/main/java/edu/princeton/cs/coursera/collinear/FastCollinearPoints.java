@@ -1,6 +1,5 @@
 package edu.princeton.cs.coursera.collinear;
 
-
 /**
  * This class implements a faster, sorting-based solution algorithm for
  * examining 4 points at a time and checks whether they all lie on the same line
@@ -30,7 +29,12 @@ package edu.princeton.cs.coursera.collinear;
  * <tt>
  * public class Fast
  * <br> {
- * <br>     public static void main(String[] args)
+ * <br> public FastCollinearPoints(Point[] points)
+ * <br>              // finds all line segments containing 4 or more points
+ * <br>    public int numberOfSegments()
+ * <br>              // the number of line segments
+ * <br>    public LineSegment[] segments()
+ * <br>              // the line segments
  * <br> }
  * </tt>
  * <p>
@@ -42,9 +46,30 @@ package edu.princeton.cs.coursera.collinear;
  * 
  */
 
-public class Fast
+public class FastCollinearPoints
 {
-    public static void main(String[] args)
+    public FastCollinearPoints(Point[] points)
     {
     }
+    
+    /**
+     * The number of line segments
+     * 
+     * @return
+     */
+    public int numberOfSegments()
+    {
+        return -1;
+    }
+
+    /**
+     * The line segments
+     * 
+     * @return
+     */
+    public LineSegment[] segments()
+    {
+        return null;
+    }
+
 }

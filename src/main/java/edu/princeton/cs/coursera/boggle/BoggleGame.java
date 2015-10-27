@@ -67,8 +67,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 
 import edu.princeton.cs.algs4.searching.SET;
-import edu.princeton.cs.introcs.In;
-import edu.princeton.cs.introcs.StdRandom;
+import edu.princeton.cs.algs4.io.In;
+import edu.princeton.cs.algs4.io.StdRandom;
 
 
 public class BoggleGame extends JFrame {

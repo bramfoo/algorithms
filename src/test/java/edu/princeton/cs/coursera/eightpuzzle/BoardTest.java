@@ -17,7 +17,7 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import edu.princeton.cs.introcs.In;
+import edu.princeton.cs.algs4.io.In;
 
 /**
  * Unit tests for Board
@@ -42,20 +42,20 @@ public class BoardTest
     @Before
     public void setup()
     {
-        // Files found in the '/test/resources/puzzle8/' directory
+        // Files found in the '/test/resources/eightpuzzle/' directory
         assertNotNull("Test file missing",
-                getClass().getResource("/8puzzle/puzzle01.txt"));
+                getClass().getResource("/eightpuzzle/puzzle01.txt"));
         assertNotNull("Test file missing",
-                getClass().getResource("/8puzzle/puzzle04.txt"));
+                getClass().getResource("/eightpuzzle/puzzle04.txt"));
         assertNotNull("Test file missing",
-                getClass().getResource("/8puzzle/puzzle06.txt"));
+                getClass().getResource("/eightpuzzle/puzzle06.txt"));
         assertNotNull("Test file missing",
-                getClass().getResource("/8puzzle/puzzle08.txt"));
+                getClass().getResource("/eightpuzzle/puzzle08.txt"));
         assertNotNull("Test file missing",
-                getClass().getResource("/8puzzle/puzzle09.txt"));
+                getClass().getResource("/eightpuzzle/puzzle09.txt"));
         // 1 0
         // 3 2
-        In in = new In("/8puzzle/puzzle01.txt");
+        In in = new In("/eightpuzzle/puzzle01.txt");
         int N = in.readInt();
         puzzle1 = new int[N][N];
         for (int i = 0; i < N; i++)
@@ -65,7 +65,7 @@ public class BoardTest
         // 0 1 3
         // 4 2 5
         // 7 8 6
-        in = new In("/8puzzle/puzzle04.txt");
+        in = new In("/eightpuzzle/puzzle04.txt");
         N = in.readInt();
         puzzle4 = new int[N][N];
         for (int i = 0; i < N; i++)
@@ -76,7 +76,7 @@ public class BoardTest
         // 5 6 7 4
         // 9 10 11 8
         // 13 14 15 12
-        in = new In("/8puzzle/puzzle06.txt");
+        in = new In("/eightpuzzle/puzzle06.txt");
         N = in.readInt();
         puzzle6 = new int[N][N];
         for (int i = 0; i < N; i++)
@@ -86,7 +86,7 @@ public class BoardTest
         // 2 3 5
         // 1 0 4
         // 7 8 6
-        in = new In("/8puzzle/puzzle08.txt");
+        in = new In("/eightpuzzle/puzzle08.txt");
         N = in.readInt();
         puzzle8 = new int[N][N];
         for (int i = 0; i < N; i++)
@@ -97,7 +97,7 @@ public class BoardTest
         // 1 10 6 8
         // 5 9 7 12
         // 13 14 11 15
-        in = new In("/8puzzle/puzzle09.txt");
+        in = new In("/eightpuzzle/puzzle09.txt");
         N = in.readInt();
         puzzle9 = new int[N][N];
         for (int i = 0; i < N; i++)

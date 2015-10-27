@@ -2,7 +2,7 @@ package edu.princeton.cs.algs4.graphs;
 import edu.princeton.cs.algs4.fundamentals.Queue;
 import edu.princeton.cs.algs4.fundamentals.UF;
 import edu.princeton.cs.algs4.sorting.MinPQ;
-import  edu.princeton.cs.introcs.*;
+import edu.princeton.cs.algs4.io.*;
 
 /*************************************************************************
  * Compilation:   javac KruskalMST.java

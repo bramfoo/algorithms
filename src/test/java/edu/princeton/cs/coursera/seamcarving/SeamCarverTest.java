@@ -13,7 +13,7 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import edu.princeton.cs.introcs.Picture;
+import edu.princeton.cs.algs4.io.Picture;
 
 /**
  * Unit tests for SeamCarver
@@ -21,7 +21,7 @@ import edu.princeton.cs.introcs.Picture;
 @RunWith(JUnit4.class)
 public class SeamCarverTest
 {
-    private String dir = "/seamCarving/";
+    private String dir = "/seamcarving/";
     private String img3x7Filename = dir + "3x7.png";
     private String img4x6Filename = dir + "4x6.png";
     private String img5x6Filename = dir + "5x6.png";

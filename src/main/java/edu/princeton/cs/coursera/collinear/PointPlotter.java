@@ -1,7 +1,7 @@
 package edu.princeton.cs.coursera.collinear;
 
-import edu.princeton.cs.introcs.In;
-import edu.princeton.cs.introcs.StdDraw;
+import edu.princeton.cs.algs4.io.In;
+import edu.princeton.cs.algs4.io.StdDraw;
 
 /*************************************************************************
  *  Compilation:  javac PointPlotter.java

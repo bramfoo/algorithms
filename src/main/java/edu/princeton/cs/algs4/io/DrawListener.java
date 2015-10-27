@@ -1,4 +1,4 @@
-package edu.princeton.cs.introcs;
+package edu.princeton.cs.algs4.io;
 
 public interface DrawListener {
     public void mousePressed (double x, double y);

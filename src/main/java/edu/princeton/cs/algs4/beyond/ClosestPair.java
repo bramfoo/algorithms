@@ -1,6 +1,6 @@
 package edu.princeton.cs.algs4.beyond;
 import edu.princeton.cs.algs4.fundamentals.Point2D;
-import  edu.princeton.cs.introcs.*;
+import edu.princeton.cs.algs4.io.*;
 
 /*************************************************************************
  *  Compilation:  javac ClosestPair.java

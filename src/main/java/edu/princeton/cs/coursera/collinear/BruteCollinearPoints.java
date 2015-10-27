@@ -18,7 +18,12 @@ package edu.princeton.cs.coursera.collinear;
  * <tt>
  * public class Brute
  * <br> {
- * <br>     public static void main(String[] args)
+ * <br>  public BruteCollinearPoints(Point[] points)
+ * <br>         // finds all line segments containing 4 points
+ * <br>   public int numberOfSegments()
+ * <br>         // the number of line segments
+ * <br>   public LineSegment[] segments()
+ * <br>         // the line segments
  * <br> }
  * </tt>
  * <p>
@@ -30,9 +35,29 @@ package edu.princeton.cs.coursera.collinear;
  * 
  */
 
-public class Brute
+public class BruteCollinearPoints
 {
-    public static void main(String[] args)
+    public BruteCollinearPoints(Point[] points)
     {
+    }
+
+    /**
+     * The number of line segments
+     * 
+     * @return
+     */
+    public int numberOfSegments()
+    {
+        return -1;
+    }
+
+    /**
+     * The line segments
+     * 
+     * @return
+     */
+    public LineSegment[] segments()
+    {
+        return null;
     }
 }

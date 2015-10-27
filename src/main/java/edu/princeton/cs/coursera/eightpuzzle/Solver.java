@@ -1,7 +1,7 @@
 package edu.princeton.cs.coursera.eightpuzzle;
 
-import edu.princeton.cs.introcs.In;
-import edu.princeton.cs.introcs.StdOut;
+import edu.princeton.cs.algs4.io.In;
+import edu.princeton.cs.algs4.io.StdOut;
 
 /**
  * This class solve the 8-puzzle problem (and its natural generalizations) using

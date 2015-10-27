@@ -1,6 +1,6 @@
 package edu.princeton.cs.algs4.strings;
 import edu.princeton.cs.algs4.sorting.MinPQ;
-import  edu.princeton.cs.introcs.*;
+import edu.princeton.cs.algs4.io.*;
 
 /*************************************************************************
  *  Compilation:  javac Huffman.java

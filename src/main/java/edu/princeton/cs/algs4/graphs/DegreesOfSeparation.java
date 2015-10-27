@@ -1,5 +1,5 @@
 package edu.princeton.cs.algs4.graphs;
-import  edu.princeton.cs.introcs.*;
+import edu.princeton.cs.algs4.io.*;
 
 /*************************************************************************
  *  Compilation:  javac DegreesOfSeparation.java

@@ -1,6 +1,6 @@
 package edu.princeton.cs.algs4.context;
 import edu.princeton.cs.algs4.fundamentals.Bag;
-import  edu.princeton.cs.introcs.*;
+import edu.princeton.cs.algs4.io.*;
 
 /*************************************************************************
  *  Compilation:  javac FlowNetwork.java

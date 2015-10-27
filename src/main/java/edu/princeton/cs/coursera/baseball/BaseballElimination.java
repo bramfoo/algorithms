@@ -1,6 +1,6 @@
 package edu.princeton.cs.coursera.baseball;
 
-import edu.princeton.cs.introcs.StdOut;
+import edu.princeton.cs.algs4.io.StdOut;
 
 /**
  * This class determines which teams have been mathematically eliminated from

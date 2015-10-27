@@ -1,6 +1,6 @@
 package edu.princeton.cs.coursera.seamcarving;
 
-import edu.princeton.cs.introcs.Picture;
+import edu.princeton.cs.algs4.io.Picture;
 
 /**
  * This class implements a content-aware image resizing technique where the
