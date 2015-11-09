@@ -3,8 +3,6 @@ package edu.princeton.cs.coursera.seamcarving;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertArrayEquals;
 
-import java.util.Arrays;
-
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
