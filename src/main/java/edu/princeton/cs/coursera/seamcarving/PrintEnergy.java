@@ -1,35 +1,34 @@
 package edu.princeton.cs.coursera.seamcarving;
 
-import edu.princeton.cs.algs4.io.Picture;
-
-/*************************************************************************
+/******************************************************************************
  *  Compilation:  javac PrintEnergy.java
  *  Execution:    java PrintEnergy input.png
- *  Dependencies: SeamCarver.java Picture.java StdDraw.java
+ *  Dependencies: SeamCarver.java
  *                
  *
  *  Read image from file specified as command line argument. Print energy
  *  of each pixel as calculated by SeamCarver object. 
  * 
- *************************************************************************/
+ ******************************************************************************/
+
+import edu.princeton.cs.algs4.io.Picture;
+import edu.princeton.cs.algs4.io.StdOut;
 
 public class PrintEnergy {
 
-    public static void main(String[] args)
-    {
-        Picture inputImg = new Picture(args[0]);
-        System.out.printf("image is %d pixels wide by %d pixels high.\n", inputImg.width(), inputImg.height());
+    public static void main(String[] args) {
+        Picture picture = new Picture(args[0]);
+        StdOut.printf("image is %d pixels wide by %d pixels high.\n", picture.width(), picture.height());
         
-        SeamCarver sc = new SeamCarver(inputImg);
+        SeamCarver sc = new SeamCarver(picture);
         
-        System.out.printf("Printing energy calculated for each pixel.\n");        
+        StdOut.printf("Printing energy calculated for each pixel.\n");        
 
-        for (int j = 0; j < sc.height(); j++)
-        {
+        for (int j = 0; j < sc.height(); j++) {
             for (int i = 0; i < sc.width(); i++)
-                System.out.printf("%9.0f ", sc.energy(i, j));
-
-            System.out.println();
+                StdOut.printf("%9.0f ", sc.energy(i, j));
+            StdOut.println();
         }
     }
+
 }
