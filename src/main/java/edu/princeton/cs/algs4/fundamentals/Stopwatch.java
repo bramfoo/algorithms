@@ -1,11 +1,14 @@
-package edu.princeton.cs.algs4.fundamentals;
-import edu.princeton.cs.algs4.io.*;
-
-/*************************************************************************
+/******************************************************************************
  *  Compilation:  javac Stopwatch.java
+ *  Execution:    none
+ *  Dependencies: none
  *
+ *  A utility class to measure the running time (wall clock) of a
+ *  program.
  *
- *************************************************************************/
+ ******************************************************************************/
+
+package edu.princeton.cs.algs4.fundamentals;
 
 /**
  *  The <tt>Stopwatch</tt> data type is for measuring
@@ -24,7 +27,7 @@ public class Stopwatch {
     private final long start;
 
     /**
-     * Initialize a stopwatch object.
+     * Initializes a new stopwatch.
      */
     public Stopwatch() {
         start = System.currentTimeMillis();
@@ -32,7 +35,9 @@ public class Stopwatch {
 
 
     /**
-     * Returns the elapsed time (in seconds) since this object was created.
+     * Returns the elapsed CPU time (in seconds) since the stopwatch was created.
+     *
+     * @return elapsed CPU time (in seconds) since the stopwatch was created
      */
     public double elapsedTime() {
         long now = System.currentTimeMillis();
@@ -41,28 +46,26 @@ public class Stopwatch {
 
 } 
 
-
-/*************************************************************************
- *  Copyright 2002-2012, Robert Sedgewick and Kevin Wayne.
+/******************************************************************************
+ *  Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4-package.jar, which accompanies the textbook
+ *  This file is part of algs4.jar, which accompanies the textbook
  *
  *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
  *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
  *      http://algs4.cs.princeton.edu
  *
  *
- *  algs4-package.jar is free software: you can redistribute it and/or modify
+ *  algs4.jar is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  algs4-package.jar is distributed in the hope that it will be useful,
+ *  algs4.jar is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
-
+ *
  *  You should have received a copy of the GNU General Public License
- *  along with algs4-package.jar.  If not, see http://www.gnu.org/licenses.
- *************************************************************************/
-
+ *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
+ ******************************************************************************/
