@@ -315,17 +315,53 @@ public class SeamCarverTest
     }
 
     @Test
-    public void testRemoveIllegalVerticalSeam()
+    public void testRemoveIllegalVerticalSeam1()
     {
         exception.expect(IllegalArgumentException.class);
         s3x7.removeVerticalSeam(new int[]{1, 2, 1, 2, 3, 2, 2});
     }
 
     @Test
-    public void testRemoveIllegalHorizontalSeam()
+    public void testRemoveIllegalVerticalSeam2()
+    {
+        s3x7.removeVerticalSeam(new int[]{1, 2, 1, 2, 1, 2, 2});
+
+        exception.expect(IllegalArgumentException.class);
+        s3x7.removeVerticalSeam(new int[]{1, 2, 1, 2, 1, 2, 2, 1});
+    }
+
+    @Test
+    public void testRemoveIllegalVerticalSeam3()
+    {
+        s3x7.removeVerticalSeam(new int[]{1, 2, 1, 2, 1, 2, 2});
+
+        exception.expect(IllegalArgumentException.class);
+        s3x7.removeVerticalSeam(new int[]{1, 2, 1, 2, 1, 2});
+    }
+
+    @Test
+    public void testRemoveIllegalHorizontalSeam1()
     {
         exception.expect(IllegalArgumentException.class);
         s3x7.removeHorizontalSeam(new int[]{5, 6, 7});
+    }
+
+    @Test
+    public void testRemoveIllegalHorizontalSeam2()
+    {
+        s3x7.removeHorizontalSeam(new int[]{5, 6, 5});
+        
+        exception.expect(IllegalArgumentException.class);
+        s3x7.removeHorizontalSeam(new int[]{5, 6, 5, 4});
+    }
+    
+    @Test
+    public void testRemoveIllegalHorizontalSeam3()
+    {
+        s3x7.removeHorizontalSeam(new int[]{5, 6, 5});
+        
+        exception.expect(IllegalArgumentException.class);
+        s3x7.removeHorizontalSeam(new int[]{5, 6});
     }
 
     @Test
@@ -385,5 +421,50 @@ public class SeamCarverTest
         
         exception.expect(NullPointerException.class);
         s6x5.removeHorizontalSeam(null);
+    }
+    
+    @Test
+    public void testMixedCalls()
+    {
+        p6x5 = new Picture(img6x5Filename);
+        s6x5 = new SeamCarver(p6x5);
+        assertEquals("Wrong energy", 1000d, s6x5.energy(0, 0), EPSILON);
+        assertEquals("Incorrect width", 6, s6x5.width());
+        assertEquals("Incorrect height", 5, s6x5.height());
+        // Displaying horizontal seam calculated.
+        //        1000.00  1000.00  1000.00  1000.00  1000.00  1000.00* 
+        //        1000.00*  237.35   151.02*  234.09   107.89* 1000.00  
+        //        1000.00   138.69*  228.10   133.07*  211.51  1000.00  
+        //        1000.00   153.88   174.01   284.01   194.50  1000.00  
+        //        1000.00  1000.00  1000.00  1000.00  1000.00  1000.00  
+        int[] result = s6x5.findHorizontalSeam();
+        s6x5.removeHorizontalSeam(result);
+        // Displaying vertical seam calculated.
+        //        1000.00  1000.00* 1000.00  1000.00  1000.00  1000.00 
+        //        1000.00   146.57   125.24*  167.82   135.50  1000.00  
+        //        1000.00   253.42   174.01*  227.49   194.50  1000.00  
+        //        1000.00  1000.00* 1000.00  1000.00  1000.00  1000.00  
+        assertEquals("Wrong energy", 1000d, s6x5.energy(0, 0), EPSILON);
+        assertEquals("Wrong energy", 1000d, s6x5.energy(1, 0), EPSILON);
+        assertEquals("Wrong energy", 146.57d, s6x5.energy(1, 1), EPSILON);
+        assertEquals("Wrong energy", 194.5d, s6x5.energy(4, 2), EPSILON);
+        assertEquals("Wrong energy", 1000d, s6x5.energy(5, 3), EPSILON);
+        assertEquals("Incorrect width", 6, s6x5.width());
+        assertEquals("Incorrect height", 4, s6x5.height());
+        
+        result = s6x5.findVerticalSeam();
+        s6x5.removeVerticalSeam(result);
+        //        1000.00  1000.00  1000.00  1000.00  1000.00 
+        //        1000.00   149.02   162.72   135.50  1000.00  
+        //        1000.00   143.88   106.92   194.50  1000.00  
+        //        1000.00  1000.00  1000.00  1000.00  1000.00  
+
+        assertEquals("Wrong energy", 1000d, s6x5.energy(0, 0), EPSILON);
+        assertEquals("Wrong energy", 1000d, s6x5.energy(1, 0), EPSILON);
+        assertEquals("Wrong energy", 149.02d, s6x5.energy(1, 1), EPSILON);
+        assertEquals("Wrong energy", 194.5d, s6x5.energy(3, 2), EPSILON);
+        assertEquals("Incorrect width", 5, s6x5.width());
+        assertEquals("Incorrect height", 4, s6x5.height());
+
     }
 }
