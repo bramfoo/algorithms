@@ -112,8 +112,7 @@ public class SeamCarver
      * pixel (x + 1, y) and pixel (x − 1, y).<br>
      * The square of the y-gradient Δy^2(x, y) is defined in an analogous
      * manner. <br>
-     * The energy of pixels at the border of the image is defined to be 2552 +
-     * 2552 + 2552 = 195075
+     * The energy of pixels at the border of the image is defined to be 1000
      * 
      * @param x
      *            Column of pixel
