@@ -315,6 +315,20 @@ public class SeamCarverTest
     }
 
     @Test
+    public void testRemoveIllegalVerticalSeam()
+    {
+        exception.expect(IllegalArgumentException.class);
+        s3x7.removeVerticalSeam(new int[]{1, 2, 1, 2, 3, 2, 2});
+    }
+
+    @Test
+    public void testRemoveIllegalHorizontalSeam()
+    {
+        exception.expect(IllegalArgumentException.class);
+        s3x7.removeHorizontalSeam(new int[]{5, 6, 7});
+    }
+
+    @Test
     public void testRemoveHorizontalSeam()
     {
         // Displaying horizontal seam calculated.
