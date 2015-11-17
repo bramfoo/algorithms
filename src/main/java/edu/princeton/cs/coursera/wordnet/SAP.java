@@ -131,8 +131,16 @@ public class SAP
 
     /**
      * Do unit testing of this class. Method provided as part of the assignment.
-     * Sample invocation: java SAP digraph1.txt 3 11 9 12
-     * 
+     * Sample invocation:
+     *   java SAP digraph1.txt
+     *     3 11
+     * [Output] length = 4, ancestor = 1   
+     *     9 12
+     * [Output] length = 3, ancestor = 5
+     *     7 2    
+     * [Output] length = 4, ancestor = 0
+     *     1 6
+     * [Output] length = -1, ancestor = -1
      * @param args
      */
     public static void main(String[] args)

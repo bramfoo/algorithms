@@ -22,15 +22,18 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class BaseballEliminationTest
 {
-    private String dir = "/baseball/";
-    private String teams1 = dir + "teams1.txt";
-    private String teams4 = dir + "teams4.txt";
-    private String teams5 = dir + "teams5.txt";
-    private String teams12 = dir + "teams12.txt";
-    private String teams32 = dir + "teams32.txt";
+    protected String dir = "/baseball/";
+    protected String teams1 = dir + "teams1.txt";
+    protected String teams4 = dir + "teams4.txt";
+    protected String teams5 = dir + "teams5.txt";
+    protected String teams12 = dir + "teams12.txt";
+    protected String teams32 = dir + "teams32.txt";
 
-    private BaseballElimination b1;
-    private BaseballElimination b4;
+    protected BaseballElimination b1;
+    protected BaseballElimination b4;
+    protected BaseballElimination b5;
+    protected BaseballElimination b12;
+    protected BaseballElimination b32;
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
@@ -40,6 +43,9 @@ public class BaseballEliminationTest
     {
         b1 = new BaseballElimination(teams1);
         b4 = new BaseballElimination(teams4);
+        b5 = new BaseballElimination(teams5);
+        b12 = new BaseballElimination(teams12);
+        b32 = new BaseballElimination(teams32);
     }
 
     @Test
@@ -168,13 +174,10 @@ public class BaseballEliminationTest
         assertTrue("Team is eliminated", b4.isEliminated("Philadelphia"));
 
         // Non-trivial elimination
-        BaseballElimination b5 = new BaseballElimination(teams5);
         assertTrue("Team is eliminated", b5.isEliminated("Detroit"));
 
-        BaseballElimination b12 = new BaseballElimination(teams12);
         assertTrue("Team is eliminated", b12.isEliminated("Japan"));
 
-        BaseballElimination b32 = new BaseballElimination(teams32);
         assertTrue("Team is eliminated", b32.isEliminated("Team25"));
         assertTrue("Team is eliminated", b32.isEliminated("Team29"));
         assertFalse("Team is eliminated", b32.isEliminated("Team24"));
@@ -206,7 +209,6 @@ public class BaseballEliminationTest
         assertTrue("Wrong team in certificate", a.contains("Atlanta"));
         assertTrue("Wrong team in certificate", a.contains("New_York"));
 
-        BaseballElimination b5 = new BaseballElimination(teams5);
         iter = b5.certificateOfElimination("Detroit");
 
         a = new ArrayList<String>();

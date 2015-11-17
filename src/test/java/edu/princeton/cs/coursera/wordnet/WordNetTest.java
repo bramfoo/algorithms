@@ -19,14 +19,15 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class WordNetTest
 {
-    private String dir = "/wordnet/";
-    private String syn1Filename = dir + "synsets100-subgraph.txt";
-    private String hyp1Filename = dir + "hypernyms100-subgraph.txt";
+    protected String dir = "/wordnet/";
+    protected String syn1Filename = dir + "synsets100-subgraph.txt";
+    protected String hyp1Filename = dir + "hypernyms100-subgraph.txt";
 
-    private String assignmentSynsFilename = dir + "synsets.txt";
-    private String assignmentHypFilename = dir + "hypernyms.txt";
+    protected String assignmentSynsFilename = dir + "synsets.txt";
+    protected String assignmentHypFilename = dir + "hypernyms.txt";
 
-    private WordNet w;
+    protected WordNet w1;
+    protected WordNet wA;
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
@@ -34,13 +35,21 @@ public class WordNetTest
     @Before
     public void setup()
     {
-        w = new WordNet(syn1Filename, hyp1Filename);
+        w1 = new WordNet(syn1Filename, hyp1Filename);
+    }
+
+    /*
+     * This is in a separate setup method to avoid being instantiated for every test
+     */
+    public void setupHeavy()
+    {
+        wA = new WordNet(assignmentSynsFilename, assignmentHypFilename);
     }
 
     @Test
     public void testNouns()
     {
-        Iterable<String> result = w.nouns();
+        Iterable<String> result = w1.nouns();
         Iterator<String> it = result.iterator();
         int count = 0;
         while (it.hasNext())
@@ -50,8 +59,8 @@ public class WordNetTest
         }
         assertEquals("Incorrect number of nouns", 157, count);
 
-        w = new WordNet(assignmentSynsFilename, assignmentHypFilename);
-        result = w.nouns();
+        setupHeavy();
+        result = wA.nouns();
         it = result.iterator();
         count = 0;
         while (it.hasNext())
@@ -66,7 +75,7 @@ public class WordNetTest
     public void testIsNounNull()
     {
         exception.expect(NullPointerException.class);
-        w.isNoun(null);
+        w1.isNoun(null);
     }
 
     @Test
@@ -76,81 +85,81 @@ public class WordNetTest
                 "entity", "fibrinase", "factor_XIII", "prothrombin", "factor_II",
                 "zymase"};
         for (String word : nouns)
-            assertTrue("Noun " + word + " is a WordNet noun", w.isNoun(word));
+            assertTrue("Noun " + word + " is a WordNet noun", w1.isNoun(word));
 
         String[] notNouns = new String[]{"C-reactive_protei", "CR", "collage",
                 "ntity", "ibrinase", "factr_XIII", "prothombin", "factorII", "ymase"};
         for (String word : notNouns)
-            assertFalse("Noun " + word + " is NOT a WordNet noun", w.isNoun(word));
+            assertFalse("Noun " + word + " is NOT a WordNet noun", w1.isNoun(word));
     }
 
     @Test
     public void testDistanceExceptionA()
     {
         exception.expect(IllegalArgumentException.class);
-        w.distance("NotAWordInWordNet", "entity");
+        w1.distance("NotAWordInWordNet", "entity");
     }
 
     @Test
     public void testDistanceNullA()
     {
         exception.expect(NullPointerException.class);
-        w.distance(null, "entity");
+        w1.distance(null, "entity");
     }
 
     @Test
     public void testDistanceExceptionB()
     {
         exception.expect(IllegalArgumentException.class);
-        w.distance("entity", "NotAWordInWordNet");
+        w1.distance("entity", "NotAWordInWordNet");
     }
 
     @Test
     public void testDistanceNullB()
     {
         exception.expect(NullPointerException.class);
-        w.distance("entity", null);
+        w1.distance("entity", null);
     }
 
     @Test
     public void testDistanceExceptionAB()
     {
         exception.expect(IllegalArgumentException.class);
-        w.distance("NotAWordInWordNet", "NotAWordInWordNet");
+        w1.distance("NotAWordInWordNet", "NotAWordInWordNet");
     }
 
     @Test
     public void testDistanceNullAB()
     {
         exception.expect(NullPointerException.class);
-        w.distance(null, null);
+        w1.distance(null, null);
     }
 
     @Test
     public void testDistance()
     {
+        setupHeavy();
         int result;
 
-        w = new WordNet(assignmentSynsFilename, assignmentHypFilename);
-        result = w.distance("bird", "worm");
+        result = wA.distance("bird", "worm");
         assertEquals("Incorrect distance", 5, result);
 
-        result = w.distance("municipality", "region");
+        result = wA.distance("municipality", "region");
         assertEquals("Incorrect distance", 3, result);
 
-        result = w.distance("individual", "edible_fruit");
+        result = wA.distance("individual", "edible_fruit");
         assertEquals("Incorrect distance", 7, result);
 
-        result = w.distance("white_marlin", "mileage");
+        result = wA.distance("white_marlin", "mileage");
         assertEquals("Incorrect distance", 23, result);
 
-        result = w.distance("American_water_spaniel", "histology");
+        result = wA.distance("American_water_spaniel", "histology");
         assertEquals("Incorrect distance", 27, result);
 
-        result = w.distance("Brown_Swiss", "barrel_roll");
+        result = wA.distance("Brown_Swiss", "barrel_roll");
         assertEquals("Incorrect distance", 29, result);
 
-        result = w.distance("Black_Plague", "black_marlin");
+        result = wA.distance("Black_Plague", "black_marlin");
         assertEquals("Incorrect distance", 33, result);
     }
 
@@ -158,70 +167,70 @@ public class WordNetTest
     public void testSapExceptionA()
     {
         exception.expect(IllegalArgumentException.class);
-        w.sap("NotAWordInWordNet", "entity");
+        w1.sap("NotAWordInWordNet", "entity");
     }
 
     @Test
     public void testSapNullA()
     {
         exception.expect(NullPointerException.class);
-        w.sap(null, "entity");
+        w1.sap(null, "entity");
     }
 
     @Test
     public void testSapExceptionB()
     {
         exception.expect(IllegalArgumentException.class);
-        w.sap("worm", "NotAWordInWordNet");
+        w1.sap("worm", "NotAWordInWordNet");
     }
 
     @Test
     public void testSapNullB()
     {
         exception.expect(NullPointerException.class);
-        w.sap("entity", null);
+        w1.sap("entity", null);
     }
 
     @Test
     public void testSapExceptionAB()
     {
         exception.expect(IllegalArgumentException.class);
-        w.sap("NotAWordInWordNet", "NotAWordInWordNet");
+        w1.sap("NotAWordInWordNet", "NotAWordInWordNet");
     }
 
     @Test
     public void testSapNullAB()
     {
         exception.expect(NullPointerException.class);
-        w.sap(null, null);
+        w1.sap(null, null);
     }
 
     @Test
     public void testSap()
     {
+        setupHeavy();
         String result;
 
-        w = new WordNet(assignmentSynsFilename, assignmentHypFilename);
-        result = w.sap("bird", "worm");
+        result = wA.sap("bird", "worm");
         assertEquals("Incorrect ancestor",
                 "animal animate_being beast brute creature fauna", result);
 
-        result = w.sap("municipality", "region");
+        result = wA.sap("municipality", "region");
         assertEquals("Incorrect ancestor", "region", result);
 
-        result = w.sap("individual", "edible_fruit");
+        result = wA.sap("individual", "edible_fruit");
         assertEquals("Incorrect ancestor", "physical_entity", result);
 
-        result = w.sap("white_marlin", "mileage");
+        result = wA.sap("white_marlin", "mileage");
         assertEquals("Incorrect ancestor", "entity", result);
 
-        result = w.sap("American_water_spaniel", "histology");
+        result = wA.sap("American_water_spaniel", "histology");
         assertEquals("Incorrect ancestor", "entity", result);
 
-        result = w.sap("Brown_Swiss", "barrel_roll");
+        result = wA.sap("Brown_Swiss", "barrel_roll");
         assertEquals("Incorrect ancestor", "entity", result);
 
-        result = w.sap("Black_Plague", "black_marlin");
+        result = wA.sap("Black_Plague", "black_marlin");
         assertEquals("Incorrect ancestor", "entity", result);
     }
 }

@@ -19,25 +19,29 @@ import edu.princeton.cs.algs4.io.Picture;
 @RunWith(JUnit4.class)
 public class SeamCarverTest
 {
-    private String dir = "/seamcarving/";
-    private String img1x8Filename = dir + "1x8.png";
-    private String img3x7Filename = dir + "3x7.png";
-    private String img4x6Filename = dir + "4x6.png";
-    private String img5x6Filename = dir + "5x6.png";
-    private String img6x5Filename = dir + "6x5.png";
-    private String img8x1Filename = dir + "8x1.png";
-    private String img12x10Filename = dir + "12x10.png";
+    protected String dir = "/seamcarving/";
+    protected String img1x8Filename = dir + "1x8.png";
+    protected String img3x7Filename = dir + "3x7.png";
+    protected String img4x6Filename = dir + "4x6.png";
+    protected String img5x6Filename = dir + "5x6.png";
+    protected String img6x5Filename = dir + "6x5.png";
+    protected String img8x1Filename = dir + "8x1.png";
+    protected String img12x10Filename = dir + "12x10.png";
 
     private String assignmentImgFilename = dir + "HJocean.png";
 
-    private Picture p3x7;
-    private Picture p4x6;
-    private Picture p6x5;
-    private Picture p12x10;
-    private SeamCarver s3x7;
-    private SeamCarver s4x6;
-    private SeamCarver s6x5;
-    private SeamCarver s12x10;
+    protected Picture p1x8;
+    protected Picture p3x7;
+    protected Picture p4x6;
+    protected Picture p6x5;
+    protected Picture p8x1;
+    protected Picture p12x10;
+    protected SeamCarver s1x8;
+    protected SeamCarver s3x7;
+    protected SeamCarver s4x6;
+    protected SeamCarver s6x5;
+    protected SeamCarver s8x1; 
+    protected SeamCarver s12x10;
     
     private static final double EPSILON = 1e-02;
 
@@ -47,8 +51,18 @@ public class SeamCarverTest
     @Before
     public void setup()
     {
+        p1x8 = new Picture(img1x8Filename);
+        s1x8 = new SeamCarver(p1x8);
         p3x7 = new Picture(img3x7Filename);
         s3x7 = new SeamCarver(p3x7);
+        p4x6 = new Picture(img4x6Filename);
+        s4x6 = new SeamCarver(p4x6);
+        p6x5 = new Picture(img6x5Filename);
+        s6x5 = new SeamCarver(p6x5);
+        p8x1 = new Picture(img8x1Filename);
+        s8x1 = new SeamCarver(p8x1);
+        p12x10 = new Picture(img12x10Filename);
+        s12x10 = new SeamCarver(p12x10);
     }
 
     @Test
@@ -63,8 +77,6 @@ public class SeamCarverTest
     {
         assertEquals("Incorrect width", 3, s3x7.width());
 
-        p4x6 = new Picture(img4x6Filename);
-        s4x6 = new SeamCarver(p4x6);
         assertEquals("Incorrect width", 4, s4x6.width());
     }
 
@@ -125,8 +137,6 @@ public class SeamCarverTest
         assertEquals("Wrong energy", 1000d, s3x7.energy(1, 6), EPSILON);
         assertEquals("Wrong energy", 1000d, s3x7.energy(2, 6), EPSILON);
 
-        p6x5 = new Picture(img6x5Filename);
-        s6x5 = new SeamCarver(p6x5);
         // image is 6 pixels wide by 5 pixels high.
         // Printing energy calculated for each pixel.
         //        1000.00  1000.00  1000.00  1000.00* 1000.00  1000.00  
@@ -162,8 +172,6 @@ public class SeamCarverTest
         assertEquals("Wrong seam length", p3x7.height(), result.length);
         assertArrayEquals("Wrong seam", correct, result);
 
-        p6x5 = new Picture(img6x5Filename);
-        s6x5 = new SeamCarver(p6x5);
         // Displaying vertical seam calculated.
         //        1000.00  1000.00  1000.00  1000.00* 1000.00  1000.00  
         //        1000.00   237.35   151.02   234.09   107.89* 1000.00  
@@ -175,8 +183,6 @@ public class SeamCarverTest
         assertEquals("Wrong seam length", p6x5.height(), result.length);
         assertArrayEquals("Wrong seam", correct, result);
 
-        p12x10 = new Picture(img12x10Filename);
-        s12x10 = new SeamCarver(p12x10);
         // Displaying vertical seam calculated.
         //        1000.00  1000.00  1000.00  1000.00  1000.00  1000.00  1000.00* 1000.00  1000.00  1000.00  1000.00  1000.00  
         //        1000.00   218.03   149.70   244.34   283.24   154.42   356.60   155.00*  218.34   283.59   127.79  1000.00  
@@ -193,8 +199,6 @@ public class SeamCarverTest
         assertEquals("Wrong seam length", p12x10.height(), result.length);
         assertArrayEquals("Wrong seam", correct, result);
         
-        Picture p1x8 = new Picture(img1x8Filename);
-        SeamCarver s1x8 = new SeamCarver(p1x8);
         correct = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
         result = s1x8.findVerticalSeam();
         assertEquals("Wrong seam length", p1x8.height(), result.length);
@@ -217,8 +221,6 @@ public class SeamCarverTest
         assertEquals("Wrong seam length", p3x7.width(), result.length);
         assertArrayEquals("Wrong seam", correct, result);
 
-        p6x5 = new Picture(img6x5Filename);
-        s6x5 = new SeamCarver(p6x5);
         // Displaying horizontal seam calculated.
         //        1000.00  1000.00  1000.00  1000.00  1000.00  1000.00* 
         //        1000.00*  237.35   151.02*  234.09   107.89* 1000.00  
@@ -230,8 +232,6 @@ public class SeamCarverTest
         assertEquals("Wrong seam length", p6x5.width(), result.length);
         assertArrayEquals("Wrong seam", correct, result);
 
-        p12x10 = new Picture(img12x10Filename);
-        s12x10 = new SeamCarver(p12x10);
         // Displaying horizontal seam calculated.
         //        1000.00  1000.00  1000.00  1000.00  1000.00  1000.00  1000.00  1000.00  1000.00  1000.00  1000.00  1000.00  
         //        1000.00   218.03   149.70   244.34   283.24   154.42   356.60   155.00   218.34   283.59   127.79  1000.00  
@@ -248,8 +248,6 @@ public class SeamCarverTest
         assertEquals("Wrong seam length", p12x10.width(), result.length);
         assertArrayEquals("Wrong seam", correct, result);
         
-        Picture p8x1 = new Picture(img8x1Filename);
-        SeamCarver s8x1 = new SeamCarver(p8x1);
         correct = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
         result = s8x1.findHorizontalSeam();
         assertEquals("Wrong seam length", p8x1.width(), result.length);
@@ -281,8 +279,6 @@ public class SeamCarverTest
         assertEquals("Wrong Color", p3x7.get(2, 2), newPic.get(1, 2));
         assertEquals("Wrong Color", p3x7.get(2, 6), newPic.get(1, 6));
 
-        p6x5 = new Picture(img6x5Filename);
-        s6x5 = new SeamCarver(p6x5);
         // Displaying vertical seam calculated.
         //        1000.00  1000.00  1000.00  1000.00* 1000.00  1000.00  
         //        1000.00   237.35   151.02   234.09   107.89* 1000.00  
@@ -302,8 +298,6 @@ public class SeamCarverTest
         assertEquals("Wrong Color", p6x5.get(4, 2), newPic.get(3, 2));
         assertEquals("Wrong Color", p6x5.get(5, 4), newPic.get(4, 4));
         
-        Picture p8x1 = new Picture(img8x1Filename);
-        SeamCarver s8x1 = new SeamCarver(p8x1);
         result = s8x1.findVerticalSeam();
         s8x1.removeVerticalSeam(result);
         newPic = s8x1.picture();
@@ -390,8 +384,6 @@ public class SeamCarverTest
         assertEquals("Wrong Color", p3x7.get(1, 6), newPic.get(1, 5));
         assertEquals("Wrong Color", p3x7.get(2, 6), newPic.get(2, 5));
 
-        p6x5 = new Picture(img6x5Filename);
-        s6x5 = new SeamCarver(p6x5);
         // Displaying horizontal seam calculated.
         //        1000.00  1000.00  1000.00  1000.00  1000.00  1000.00* 
         //        1000.00*  237.35   151.02*  234.09   107.89* 1000.00  
@@ -410,8 +402,6 @@ public class SeamCarverTest
         assertEquals("Wrong Color", p6x5.get(4, 3), newPic.get(4, 2));
         assertEquals("Wrong Color", p6x5.get(5, 4), newPic.get(5, 3));
         
-        Picture p1x8 = new Picture(img1x8Filename);
-        SeamCarver s1x8 = new SeamCarver(p1x8);
         result = s1x8.findHorizontalSeam();
         s1x8.removeHorizontalSeam(result);
         newPic = s1x8.picture();
@@ -426,8 +416,6 @@ public class SeamCarverTest
     @Test
     public void testMixedCalls()
     {
-        p6x5 = new Picture(img6x5Filename);
-        s6x5 = new SeamCarver(p6x5);
         assertEquals("Wrong energy", 1000d, s6x5.energy(0, 0), EPSILON);
         assertEquals("Incorrect width", 6, s6x5.width());
         assertEquals("Incorrect height", 5, s6x5.height());
