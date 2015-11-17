@@ -65,9 +65,12 @@ public class Outcast
 
     /**
      * Do unit testing of this class. Method provided as part of the assignment.
-     * Sample invocatoin: java Outcast synsets.txt hypernyms.txt outcast5.txt
-     * outcast8.txt outcast11.txt
-     * 
+     * Sample invocation:
+     *   java Outcast synsets.txt hypernyms.txt outcast5.txt outcast8.txt outcast11.txt
+     * Output:
+     *   outcast5.txt: table
+     *   outcast8.txt: bed
+     *   outcast11.txt: potato
      * @param args
      */
     public static void main(String[] args)
