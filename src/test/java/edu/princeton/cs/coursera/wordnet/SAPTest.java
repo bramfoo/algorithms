@@ -23,13 +23,13 @@ import edu.princeton.cs.algs4.io.In;
 @RunWith(JUnit4.class)
 public class SAPTest
 {
-    private String dir = "/wordnet/";
-    private String input1Filename = dir + "digraph1.txt";
+    protected String dir = "/wordnet/";
+    protected String input1Filename = dir + "digraph1.txt";
 
-    private In in;
-    private Digraph d;
-    private SAP s;
-    private int result;
+    protected In in;
+    protected Digraph d;
+    protected SAP s;
+    protected int result;
 
     @Rule
     public ExpectedException exception = ExpectedException.none();

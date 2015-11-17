@@ -19,14 +19,14 @@ import edu.princeton.cs.algs4.io.Picture;
 @RunWith(JUnit4.class)
 public class SeamCarverTest
 {
-    private String dir = "/seamcarving/";
-    private String img1x8Filename = dir + "1x8.png";
-    private String img3x7Filename = dir + "3x7.png";
-    private String img4x6Filename = dir + "4x6.png";
-    private String img5x6Filename = dir + "5x6.png";
-    private String img6x5Filename = dir + "6x5.png";
-    private String img8x1Filename = dir + "8x1.png";
-    private String img12x10Filename = dir + "12x10.png";
+    protected String dir = "/seamcarving/";
+    protected String img1x8Filename = dir + "1x8.png";
+    protected String img3x7Filename = dir + "3x7.png";
+    protected String img4x6Filename = dir + "4x6.png";
+    protected String img5x6Filename = dir + "5x6.png";
+    protected String img6x5Filename = dir + "6x5.png";
+    protected String img8x1Filename = dir + "8x1.png";
+    protected String img12x10Filename = dir + "12x10.png";
 
     private String assignmentImgFilename = dir + "HJocean.png";
 

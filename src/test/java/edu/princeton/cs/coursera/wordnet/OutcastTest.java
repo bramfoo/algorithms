@@ -17,17 +17,17 @@ import edu.princeton.cs.algs4.io.In;
 @RunWith(JUnit4.class)
 public class OutcastTest
 {
-    private String dir = "/wordnet/";
+    protected String dir = "/wordnet/";
 
-    private String assignmentSynsFilename = dir + "synsets.txt";
-    private String assignmentHypFilename = dir + "hypernyms.txt";
-    private String outcast5Filename = dir + "outcast5.txt";
-    private String outcast8Filename = dir + "outcast8.txt";
-    private String outcast11Filename = dir + "outcast11.txt";
+    protected String assignmentSynsFilename = dir + "synsets.txt";
+    protected String assignmentHypFilename = dir + "hypernyms.txt";
+    protected String outcast5Filename = dir + "outcast5.txt";
+    protected String outcast8Filename = dir + "outcast8.txt";
+    protected String outcast11Filename = dir + "outcast11.txt";
 
-    private WordNet w;
-    private Outcast o;
-    private String result;
+    protected WordNet w;
+    protected Outcast o;
+    protected String result;
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
