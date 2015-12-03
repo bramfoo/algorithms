@@ -21,7 +21,12 @@ public class WordNetTest
 {
     protected String dir = "/wordnet/";
     protected String syn1Filename = dir + "synsets100-subgraph.txt";
+    protected String syn6Filename = dir + "synsets6.txt";
+            
     protected String hyp1Filename = dir + "hypernyms100-subgraph.txt";
+    protected String hyp6ITRFilename = dir + "hypernyms6InvalidTwoRoots.txt";
+    protected String hyp6ICFilename = dir + "hypernyms6InvalidCycle.txt";
+    protected String hyp6ICPFilename = dir + "hypernyms6InvalidCycle+Path.txt";
 
     protected String assignmentSynsFilename = dir + "synsets.txt";
     protected String assignmentHypFilename = dir + "hypernyms.txt";
@@ -44,6 +49,27 @@ public class WordNetTest
     public void setupHeavy()
     {
         wA = new WordNet(assignmentSynsFilename, assignmentHypFilename);
+    }
+
+    @Test
+    public void testConstructorTwoRootException()
+    {
+        exception.expect(IllegalArgumentException.class);
+        w1 = new WordNet(syn6Filename, hyp6ITRFilename);
+    }
+
+    @Test
+    public void testConstructorInvalidCycleException()
+    {
+        exception.expect(IllegalArgumentException.class);
+        w1 = new WordNet(syn6Filename, hyp6ICFilename);
+    }
+
+    @Test
+    public void testConstructorInvalidPathException()
+    {
+        exception.expect(IllegalArgumentException.class);
+        w1 = new WordNet(syn6Filename, hyp6ICPFilename);
     }
 
     @Test
