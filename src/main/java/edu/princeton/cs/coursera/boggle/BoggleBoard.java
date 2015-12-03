@@ -4,22 +4,18 @@ import edu.princeton.cs.algs4.io.In;
 import edu.princeton.cs.algs4.io.StdOut;
 import edu.princeton.cs.algs4.io.StdRandom;
 
-/*************************************************************************
+/******************************************************************************
  *  Compilation:  javac BoggleBoard.java
  *  Execution:    java  BoggleBoard
  *  Dependencies: StdRandom.java In.java StdOut.java
  *
  *  A data type for Boggle boards.
  *
- *************************************************************************/
+ ******************************************************************************/
 
 public class BoggleBoard {
-    private final int M;        // number of rows
-    private final int N;        // number of columns
-    private char[][] board;     // the M-by-N array of characters
-
     // the 16 Boggle dice (1992 version)
-    private static final String[] boggle1992 = {
+    private static final String[] BOGGLE_1992 = {
         "LRYTTE", "VTHRWE", "EGHWNE", "SEOTIS",
         "ANAEEG", "IDSYTT", "OATTOW", "MTOICU",
         "AFPKFS", "XLDERI", "HCPOAS", "ENSIEU",
@@ -27,7 +23,7 @@ public class BoggleBoard {
     };
 
     // the 16 Boggle dice (1983 version)
-    private static final String[] boggle1983 = {
+    private static final String[] BOGGLE_1983 = {
         "AACIOT", "ABILTY", "ABJMOQ", "ACDEMP",
         "ACELRS", "ADENVZ", "AHMORS", "BIFORX",
         "DENOSW", "DKNOTU", "EEFHIY", "EGINTV",
@@ -35,7 +31,7 @@ public class BoggleBoard {
     };
 
     // the 25 Boggle Master / Boggle Deluxe dice
-    private static final String[] boggleMaster = {
+    private static final String[] BOGGLE_MASTER = {
         "AAAFRS", "AAEEEE", "AAFIRS", "ADENNN", "AEEEEM",
         "AEEGMU", "AEGMNN", "AFIRSY", "BJKQXZ", "CCNSTW",
         "CEIILT", "CEILPT", "CEIPST", "DDLNOR", "DHHLOR",
@@ -44,7 +40,7 @@ public class BoggleBoard {
     };
 
     // the 25 Big Boggle dice
-    private static final String[] boggleBig = {
+    private static final String[] BOGGLE_BIG = {
         "AAAFRS", "AAEEEE", "AAFIRS", "ADENNN", "AEEEEM",
         "AEEGMU", "AEGMNN", "AFIRSY", "BJKQXZ", "CCENST",
         "CEIILT", "CEILPT", "CEIPST", "DDHNOT", "DHHLOR",
@@ -54,8 +50,8 @@ public class BoggleBoard {
 
 
     // letters and frequencies of letters in the English alphabet
-    private static final String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    private static final double[] frequencies = {
+    private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final double[] FREQUENCIES = {
         0.08167, 0.01492, 0.02782, 0.04253, 0.12703, 0.02228,
         0.02015, 0.06094, 0.06966, 0.00153, 0.00772, 0.04025,
         0.02406, 0.06749, 0.07507, 0.01929, 0.00095, 0.05987,
@@ -63,17 +59,21 @@ public class BoggleBoard {
         0.01974, 0.00074
     };
 
+    private final int M;        // number of rows
+    private final int N;        // number of columns
+    private char[][] board;     // the M-by-N array of characters
+
     /**
      * Initializes a random 4-by-4 board, by rolling the Hasbro dice.
      */
     public BoggleBoard() {
         M = 4;
         N = 4;
-        StdRandom.shuffle(boggle1992);
+        StdRandom.shuffle(BOGGLE_1992);
         board = new char[M][N];
         for (int i = 0; i < M; i++) {
             for (int j = 0; j < N; j++) {
-                String letters = boggle1992[N*i+j];
+                String letters = BOGGLE_1992[N*i+j];
                 int r = StdRandom.uniform(letters.length());
                 board[i][j] = letters.charAt(r);
             }
@@ -96,7 +96,7 @@ public class BoggleBoard {
                     board[i][j] = 'Q';
                 else if (letter.length() != 1)
                     throw new IllegalArgumentException("invalid character: " + letter);
-                else if (alphabet.indexOf(letter) == -1)
+                else if (ALPHABET.indexOf(letter) == -1)
                     throw new IllegalArgumentException("invalid character: " + letter);
                 else 
                     board[i][j] = letter.charAt(0);
@@ -116,8 +116,8 @@ public class BoggleBoard {
         board = new char[M][N];
         for (int i = 0; i < M; i++) {
             for (int j = 0; j < N; j++) {
-                int r = StdRandom.discrete(frequencies);
-                board[i][j] = alphabet.charAt(r);
+                int r = StdRandom.discrete(FREQUENCIES);
+                board[i][j] = ALPHABET.charAt(r);
             }
         }
     }
@@ -135,7 +135,7 @@ public class BoggleBoard {
             if (a[i].length != N)
                 throw new IllegalArgumentException("char[][] array is ragged");
             for (int j = 0; j < N; j++) {
-                if (alphabet.indexOf(a[i][j]) == -1)
+                if (ALPHABET.indexOf(a[i][j]) == -1)
                     throw new IllegalArgumentException("invalid character: " + a[i][j]);
                 board[i][j] = a[i][j];
             }
