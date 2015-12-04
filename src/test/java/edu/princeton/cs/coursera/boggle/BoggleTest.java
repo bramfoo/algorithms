@@ -108,6 +108,11 @@ public class BoggleTest
         i = iterateSolutions(words, solution);
         assertEquals("Incorrect number of solutions", solution.size(), i);
 
+        solution = new HashSet<>(Arrays.asList(new String[]{"AID", "DIE", "END", "ENDS", "EYE", "ONE", "ONES", "PAID", "PAINS", "PAT", "PATE", "SEND", "SIDE", "SIN", "SINE", "SIT", "SITE", "TAT", "TIE", "TIED", "TIN", "TINY", "TYPE", "UNIT", "UNITE", "UNITED", "USE", "YET", "YOU"}));
+        words = solver.getAllValidWords(board4x4);
+        i = iterateSolutions(words, solution);
+        assertEquals("Incorrect number of solutions", solution.size(), i);
+        
         solution = new HashSet<>(Arrays.asList(new String[]{"EQUATION", "EQUATIONS", "ITS", "LET", "LETS", "NET", "ONE", "QUERIES", "QUESTION", "QUESTIONS", "QUITE", "REQUEST", "REQUIRE", "RES", "REST", "SER", "SIN", "SINE", "SIT", "SITE", "SITS", "STATE", "TAT", "TEN", "TENS", "TIE", "TIES", "TIN", "TRIES"}));
         words = solver.getAllValidWords(boardq);
         i = iterateSolutions(words, solution);
